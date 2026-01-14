@@ -6,6 +6,9 @@ import com.example.demo.repository.DestinationRepository;
 import com.example.demo.repository.ItineraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+import java.util.HashMap;
+
 
 import java.util.List;
 
@@ -41,4 +44,31 @@ public class DestinationController {
     public List<Itinerary> getAllItineraries() {
         return itineraryRepo.findAll();
     }
+
+    @PostMapping("/budget")
+    public Map<String, Double> calculateBudget(@RequestBody Map<String, Double> costs) {
+        double travelCost = costs.getOrDefault("travelCost", 0.0);
+        double accomCost = costs.getOrDefault("accomCost", 0.0);
+        double activityCost = costs.getOrDefault("activityCost", 0.0);
+        double total = travelCost + accomCost + activityCost;
+
+        Map<String, Double> result = new HashMap<>();
+        result.put("travelCost", travelCost);
+        result.put("accomCost", accomCost);
+        result.put("activityCost", activityCost);
+        result.put("total", total);
+        return result;
+    }
+
+    @GetMapping("/budget-test")
+    public Map<String, Double> calculateBudgetTest() {
+        Map<String, Double> result = new HashMap<>();
+        result.put("travelCost", 100.0);
+        result.put("accomCost", 50.0);
+        result.put("activityCost", 30.0);
+        result.put("total", 180.0);
+        return result;
+    }
+
 }
+
