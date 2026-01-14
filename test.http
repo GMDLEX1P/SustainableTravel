@@ -1,0 +1,14 @@
+### Test GET itinerary
+GET http://localhost:8080/api/itinerary
+
+### Test POST itinerary
+POST http://localhost:8080/api/itinerary
+Content-Type: application/json
+
+{
+  "name": "Almaty Weekend",
+  "destinationIds": [1, 2],
+  "startDate": "2026-02-15",
+  "endDate": "2026-02-17",
+  "activities": "Day 1: Lakes, Day 2: City"
+}
